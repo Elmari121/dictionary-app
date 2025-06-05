@@ -3,13 +3,17 @@ import axios from "axios";
 import "./dictionary.css";
 
 export default function Dictionary() {
-  const [keyword, setKeyword] = useState("sun");
+  const [keyword, setKeyword] = useState("");
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
 
   function handleResponse(response) {
-    setResult(response.data);
-    setError(null);
+    if (response.data && response.data.word) {
+      setResult(response.data);
+      setError(null);
+    } else {
+      handleError();
+    }
   }
 
   function handleError() {
@@ -19,6 +23,8 @@ export default function Dictionary() {
 
   function search(event) {
     event.preventDefault();
+    if (!keyword.trim()) return;
+
     const apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=30927dtfa44b4770359oe8258a9c5b2c`;
     axios.get(apiUrl).then(handleResponse).catch(handleError);
   }
@@ -44,13 +50,24 @@ export default function Dictionary() {
       {result && (
         <div className="result">
           <h2>{result.word}</h2>
-          {result.phonetics[0] && <p><em>{result.phonetics[0].text}</em></p>}
-          
-          {result.meanings.map((meaning, index) => (
+
+          {result.phonetics?.[0]?.text && (
+            <p>
+              <em>{result.phonetics[0].text}</em>
+            </p>
+          )}
+
+          {result.phonetics?.[0]?.audio && (
+            <audio controls src={result.phonetics[0].audio}>
+              Your browser does not support the audio element.
+            </audio>
+          )}
+
+          {result.meanings?.map((meaning, index) => (
             <div key={index} className="meaning">
               <strong>{meaning.partOfSpeech}</strong>
               <ul>
-                {meaning.definitions.map((def, i) => (
+                {meaning.definitions?.map((def, i) => (
                   <li key={i}>{def.definition}</li>
                 ))}
               </ul>
