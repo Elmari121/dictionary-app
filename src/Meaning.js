@@ -1,26 +1,20 @@
 import React from "react";
 
-export default function Meaning(props) {
-  const { partOfSpeech, definitions } = props.meaning;
-
-  if (!definitions || definitions.length === 0) {
+export default function Meaning({ meaning }) {
+  if (!meaning || !Array.isArray(meaning.definitions) || meaning.definitions.length === 0) {
     return null;
   }
 
+  const firstDefinition = meaning.definitions[0];
+
   return (
-    <div className="Meaning">
-      <h3>{partOfSpeech}</h3>
-      {definitions.map(function (definition, index) {
-        return (
-          <div key={index}>
-            <p>
-              {definition.definition}
-              <br />
-              <em>{definition.example ?? ""}</em>
-            </p>
-          </div>
-        );
-      })}
+    <div className="mb-4">
+      <p className="italic text-gray-600">{meaning.partOfSpeech}</p>
+      <p className="text-sm text-gray-800">{firstDefinition.definition}</p>
+      {firstDefinition.example && (
+        <p className="text-xs text-gray-500 mt-1">e.g. {firstDefinition.example}</p>
+      )}
     </div>
   );
 }
+

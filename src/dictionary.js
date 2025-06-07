@@ -1,46 +1,49 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Results from "./Results";
-import "./dictionary.css";
+import Result from "./Results";
 
 export default function Dictionary() {
-  let [keyword, setKeyword] = useState("");
-  let [results, setResults] = useState(null);
+  const [word, setWord] = useState("");
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState("");
 
-  function handleResponse(response) {
-    console.log("API response:", response.data); 
-setResults(response.data);
-
-  }
-
-  function search(event) {
-    event.preventDefault();
-    if (!keyword) {
-      alert("Please enter a word");
-      return;
+  const searchWord = async () => {
+    if (!word.trim()) return;
+    try {
+      const response = await axios.get(
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+      );
+      setResult(response.data[0]); 
+      setError("");
+    } catch (err) {
+      setResult(null);
+      setError("Word not found. Please try another.");
     }
+  };
 
-    let apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=30927dtfa44b4770359oe8258a9c5b2c`;
-    axios.get(apiUrl).then(handleResponse);
-  }
-
-  function handleKeywordChange(event) {
-    setKeyword(event.target.value);
-  }
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") searchWord();
+  };
 
   return (
-    <div className="Dictionary">
-      <form onSubmit={search}>
-        <input
-          type="search"
-          placeholder="Enter a word..."
-          onChange={handleKeywordChange}
-        />
-        <button type="submit" style={{ padding: 10, fontSize: 16 }}>
-          Search
-        </button>
-      </form>
-      <Results results={results} />
+    <div className="max-w-md mx-auto mt-10 p-4 bg-white rounded-xl shadow">
+      <h1 className="text-2xl font-bold text-center mb-4">📘 Dictionary</h1>
+      <input
+        type="text"
+        value={word}
+        onChange={(e) => setWord(e.target.value)}
+        onKeyDown={handleKeyDown}
+        placeholder="Enter a word"
+        className="w-full border p-2 rounded mb-4"
+      />
+      <button
+        onClick={searchWord}
+        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+      >
+        Search
+      </button>
+      {error && <p className="text-red-500 mt-4">{error}</p>}
+      {result && <Result result={result} />}
     </div>
   );
 }

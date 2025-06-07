@@ -1,19 +1,11 @@
-import "./App.css";
+import React from "react";
 import Dictionary from "./dictionary";
+
+
 export default function App() {
   return (
-    <div className="App">
-      <div className="container">
-        <header className="App-header">
-        
-        </header>
-        <main>
-          <Dictionary />
-        </main>
-        <footer className="App-footer">
-          Coded by Elmari Robberts
-        </footer>
-      </div>
+    <div className="bg-gray-100 min-h-screen p-4">
+      <Dictionary />
     </div>
   );
 }

@@ -1,48 +1,6 @@
-.dictionary {
-  text-align: center;
-}
-
-.search-form {
-  margin-bottom: 20px;
-}
-
-.search-input {
-  padding: 10px;
-  font-size: 16px;
-  width: 70%;
-  margin-right: 10px;
-}
-
-.search-button {
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-.error-message {
-  color: red;
-}
-
-.result {
-  text-align: left;
-  border-top: 1px solid #ddd;
-  padding-top: 20px;
-}
-
-.pronunciation {
-  font-style: italic;
-  color: #555;
-}
-
-.meaning {
-  margin-top: 10px;
-}
-
-.example {
-  margin-top: 10px;
-  color: #666;
-}
-
-.synonyms {
-  margin-top: 10px;
-  font-style: italic;
+body {
+  font-family: sans-serif;
+  background-color: #f3f4f6;
+  margin: 0;
+  padding: 0;
 }
