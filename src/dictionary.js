@@ -7,13 +7,14 @@ export default function Dictionary() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
 
-  const searchWord = async () => {
-    if (!word.trim()) return;
+  const searchWord = async (searchTerm) => {
+    if (!searchTerm.trim()) return;
     try {
       const response = await axios.get(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`
       );
-      setResult(response.data[0]); 
+      setResult(response.data[0]);
+      setWord(searchTerm); 
       setError("");
     } catch (err) {
       setResult(null);
@@ -22,7 +23,7 @@ export default function Dictionary() {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") searchWord();
+    if (e.key === "Enter") searchWord(word);
   };
 
   return (
@@ -37,13 +38,13 @@ export default function Dictionary() {
         className="w-full border p-2 rounded mb-4"
       />
       <button
-        onClick={searchWord}
+        onClick={() => searchWord(word)}
         className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
       >
         Search
       </button>
       {error && <p className="text-red-500 mt-4">{error}</p>}
-      {result && <Result result={result} />}
+      {result && <Result result={result} onSynonymClick={searchWord} />}
     </div>
   );
 }
