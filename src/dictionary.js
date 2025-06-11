@@ -3,7 +3,7 @@ import axios from "axios";
 import Result from "./Results";
 import "./dictionary.css";
 import Photo from "./photo";
-
+import Footer from "./footer";
 
 
 
@@ -49,6 +49,7 @@ export default function Dictionary() {
         {error && <p className="error-message">{error}</p>}
         {result && <Result result={result} onSynonymClick={searchWord} />}
         {result && <Photo searchTerm={result.word} />}
+        <Footer />
       </div>
     </div>
   );
