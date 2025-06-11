@@ -1,0 +1,41 @@
+.meaning-container {
+  margin-bottom: 1rem;
+}
+
+.part-of-speech {
+  font-style: italic;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.definition-text {
+  font-size: 0.9rem;
+  color: #1f2937;
+}
+
+.example-text {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.synonyms {
+  font-size: 0.875rem;
+  color: #6b21a8;
+  margin-top: 0.5rem;
+}
+
+.synonym-button {
+  text-decoration: underline;
+  margin-right: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #6b21a8;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.synonym-button:hover {
+  color: #4c1d95;
+}

@@ -1,0 +1,71 @@
+.result-container {
+  margin-top: 1.5rem;
+}
+
+.result-word {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+}
+
+.phonetic-group {
+  margin-bottom: 1rem;
+}
+
+.phonetic-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.phonetic-text {
+  font-style: italic;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.audio-button {
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background-color:#6f4785 ;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.audio-button:hover {
+  background-color:#9b09e9;
+}
+
+.audio-button.loading {
+  background-color: #f59e0b; 
+}
+
+.audio-button.playing {
+  background-color: #10b981; 
+  animation: pulse 1s infinite;
+}
+
+.audio-button.error {
+  background-color: #ef4444; 
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.no-meaning-message {
+  margin-top: 1rem;
+  color: #ef4444;
+}
