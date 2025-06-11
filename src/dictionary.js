@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import Result from "./Results";
 import "./dictionary.css";
+import Photo from "./photo";
+
+
+
 
 export default function Dictionary() {
   const [word, setWord] = useState("");
@@ -44,6 +48,7 @@ export default function Dictionary() {
         </button>
         {error && <p className="error-message">{error}</p>}
         {result && <Result result={result} onSynonymClick={searchWord} />}
+        {result && <Photo searchTerm={result.word} />}
       </div>
     </div>
   );
